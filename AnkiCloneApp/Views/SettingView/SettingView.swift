@@ -2,6 +2,16 @@ import SnapKit
 import UIKit
 
 final class SettingView: UIView, RootView {
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        
+        titleLabel.text = "푸시 알림"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 19)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return titleLabel
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         
@@ -24,10 +34,18 @@ final class SettingView: UIView, RootView {
     
     func initializeUI() {
         backgroundColor = .systemBackground
+        
+        addSubview(titleLabel)
         addSubview(tableView)
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(19)
+            make.leading.equalToSuperview().offset(19)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
