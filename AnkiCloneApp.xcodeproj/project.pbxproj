@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		331A57462AC2844A0044A94C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 331A57452AC2844A0044A94C /* SnapKit */; };
-		331A57482AC2844A0044A94C /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 331A57472AC2844A0044A94C /* SnapKit-Dynamic */; };
 		331A574B2AC284940044A94C /* Publishable in Frameworks */ = {isa = PBXBuildFile; productRef = 331A574A2AC284940044A94C /* Publishable */; };
 		331A574E2AC284E00044A94C /* EventBus in Frameworks */ = {isa = PBXBuildFile; productRef = 331A574D2AC284E00044A94C /* EventBus */; };
 		331A57512AC2857B0044A94C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57502AC2857B0044A94C /* RootViewController.swift */; };
@@ -76,7 +75,6 @@
 				331A574E2AC284E00044A94C /* EventBus in Frameworks */,
 				331A57462AC2844A0044A94C /* SnapKit in Frameworks */,
 				331A574B2AC284940044A94C /* Publishable in Frameworks */,
-				331A57482AC2844A0044A94C /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +260,6 @@
 			name = AnkiCloneApp;
 			packageProductDependencies = (
 				331A57452AC2844A0044A94C /* SnapKit */,
-				331A57472AC2844A0044A94C /* SnapKit-Dynamic */,
 				331A574A2AC284940044A94C /* Publishable */,
 				331A574D2AC284E00044A94C /* EventBus */,
 			);
@@ -601,11 +598,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		331A57472AC2844A0044A94C /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 		331A574A2AC284940044A94C /* Publishable */ = {
 			isa = XCSwiftPackageProductDependency;
