@@ -32,31 +32,39 @@ final class SettingView: UIView, RootView {
     }
 }
 
-extension SettingView: UITableViewDelegate, UITableViewDataSource {
+extension SettingView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.accessoryType = .disclosureIndicator
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        var config = cell.defaultContentConfiguration()
         
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "알림 관리"
+            config.text = "알림 관리" // viewModel.title
+            config.secondaryText = "매일" // viewModel.secondaryText
         case 1:
-            cell.textLabel?.text = "기본 리마인더 시간"
+            config.text = "기본 리마인더 시간"
+            config.secondaryText = "9:00 오전"
         case 2:
-            cell.textLabel?.text = "앱 내 알림 표시"
             let switchView = UISwitch()
+
+            config.text = "앱 내 알림 표시"
             cell.accessoryView = switchView
         default:
             break
         }
         
+        cell.contentConfiguration = config
+        cell.accessoryType = .disclosureIndicator
+        
         return cell
     }
-    
+}
+
+extension SettingView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
