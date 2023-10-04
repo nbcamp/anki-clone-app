@@ -35,6 +35,7 @@
 		333551332AC282130025C29E /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 333551312AC282130025C29E /* CoreData.xcdatamodeld */; };
 		333551352AC282140025C29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333551342AC282140025C29E /* Assets.xcassets */; };
 		333551382AC282140025C29E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333551362AC282140025C29E /* LaunchScreen.storyboard */; };
+		DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7438252ACD12310066AC2A /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		333551342AC282140025C29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333551372AC282140025C29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333551392AC282140025C29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE7438252ACD12310066AC2A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				331A576C2AC2969B0044A94C /* Deck.swift */,
+				DE7438252ACD12310066AC2A /* SettingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				331A57812AC2991A0044A94C /* SettingService.swift in Sources */,
 				331A57782AC297720044A94C /* KeyboardHandler.swift in Sources */,
 				331A57742AC297350044A94C /* UIView+Ext.swift in Sources */,
+				DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */,
 				331A57722AC297160044A94C /* UserDefaultsStorage.swift in Sources */,
 				331A57632AC2913C0044A94C /* StudyView.swift in Sources */,
 				3335512B2AC282130025C29E /* SceneDelegate.swift in Sources */,
