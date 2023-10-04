@@ -45,6 +45,14 @@ final class HomeView: UIView, RootView {
         return button
     }()
     
+    private var isActive: Bool = false {
+        didSet {
+            showActionButtons()
+        }
+    }
+    
+    private var animation: UIViewPropertyAnimator?
+    
     func initializeUI() {
         backgroundColor = .systemBackground
         
@@ -80,4 +88,49 @@ final class HomeView: UIView, RootView {
         }
         
     }
+    @objc private func didTapSettingButton() {
+        print("settingButtonTapped")
+        EventBus.shared.emit(PushToSettingScreenEvent())
+    }
+    
+    @objc private func didTapFloatingButton() {
+        isActive.toggle()
+    }
+    
+    private func showActionButtons() {
+        popButtons()
+        rotateFloatingButton()
+    }
+    
+    private func popButtons() {
+        if isActive {
+            writeButton.layer.transform = CATransform3DMakeScale(0.4, 0.4, 1)
+            UIView.animate(withDuration: 0.3, delay: 0.2, usingSpringWithDamping: 0.55, initialSpringVelocity: 0.3, options: [.curveEaseInOut], animations: { [weak self] in
+                guard let self = self else { return }
+                self.writeButton.layer.transform = CATransform3DIdentity
+                self.writeButton.alpha = 1.0
+            })
+        } else {
+            UIView.animate(withDuration: 0.15, delay: 0.2, options: []) { [weak self] in
+                guard let self = self else { return }
+                self.writeButton.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.1)
+                self.writeButton.alpha = 0.0
+            }
+        }
+    }
+    
+    private func rotateFloatingButton() {
+        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        let fromValue = isActive ? 0 : CGFloat.pi / 4
+        let toValue = isActive ? CGFloat.pi / 4 : 0
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 0.3
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        floatingButton.layer.add(animation, forKey: nil)
+    }
 }
+
+
+
