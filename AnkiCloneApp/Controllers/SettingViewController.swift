@@ -8,7 +8,8 @@ struct ShowNotificationManagementActionEvent: EventProtocol {
 final class SettingViewController: RootViewController<SettingView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "설정"
+
         EventBus.shared.on(ShowNotificationManagementActionEvent.self) { _ in
             self.showNotificationManagementActionSheet()
         }
