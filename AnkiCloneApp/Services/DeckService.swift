@@ -1,13 +1,27 @@
+import Foundation
+
 final class DeckService {
     static let shared: DeckService = .init()
     private init() {}
 
-    private(set) var decks: [Deck] = [] {
-        didSet { save(decks: decks) }
-    }
+    private(set) var decks: [Deck] = []
 
     private lazy var key = String(describing: self)
     var storage: Storage? { didSet { decks = load() } }
+
+    func flashCards(of deck: Deck) -> [FlashCard] {
+        deck.flashCards.filter { !$0.memorized }
+    }
+
+    func create(deck: Deck) {
+        decks.append(deck)
+        save(decks: decks)
+    }
+
+    func remind(_ flashCard: FlashCard, after: TimeInterval) {
+        flashCard.forgotAt += .init(after)
+        save(decks: decks)
+    }
 
     private func save(decks: [Deck]) {
         storage?.save(decks.map { $0.toModel() }, forKey: key)
