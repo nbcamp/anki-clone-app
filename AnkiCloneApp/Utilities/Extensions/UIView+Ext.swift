@@ -5,13 +5,14 @@ extension UIView {
     var name: String { String(describing: self) }
 }
 
-extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, CircleCellDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "circleCell", for: indexPath) as! CircleCell
+        cell.delegate = self
         let deck = decks[indexPath.row]
                 cell.configure(with: deck)
         return cell
@@ -19,6 +20,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         EventBus.shared.emit(CellTappedEvent())
+    }
+    
+    func didTapDeleteButton(in cell: CircleCell) {
+        
+        print("Delete button tapped")
+        guard let indexPath = homeCollectionView.indexPath(for: cell) else { return }
+        decks.remove(at: indexPath.row)
+        homeCollectionView.deleteItems(at: [indexPath])
     }
 }
 

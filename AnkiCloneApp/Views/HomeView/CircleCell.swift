@@ -7,19 +7,34 @@
 
 import UIKit
 
+protocol CircleCellDelegate: AnyObject {
+    func didTapDeleteButton(in cell: CircleCell)
+}
+
 class CircleCell: UICollectionViewCell {
+    
+    weak var delegate: CircleCellDelegate?
     
     let circleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "book")
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.borderWidth = 10
+        imageView.layer.borderWidth = 8
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.cornerRadius = 70
         imageView.clipsToBounds = true
         return imageView
     }()
-
+    
+    let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        let trashImage = UIImage(systemName: "trash.fill") // 쓰레기통 아이콘
+        button.setImage(trashImage, for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        return button
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -48,14 +63,21 @@ class CircleCell: UICollectionViewCell {
     
     private func setupUI() {
         addSubview(circleImageView)
+        addSubview(deleteButton)
         addSubview(titleLabel)
         addSubview(createdLabel)
         
-        circleImageView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
+        circleImageView.frame = CGRect(x: 0, y: 0, width: 140, height: 140)
+        deleteButton.frame = CGRect(x: 110, y: -10, width: 50, height: 50)
         titleLabel.frame = CGRect(x: 0, y: 160, width: self.bounds.width, height: 20)
         createdLabel.frame = CGRect(x: 0, y: frame.size.height - 30, width: frame.size.width, height: 20) // 높이는 원하는 값으로 조정
         
         bringSubviewToFront(circleImageView)
+        bringSubviewToFront(deleteButton)
+    }
+    
+    @objc private func handleDelete() {
+        delegate?.didTapDeleteButton(in: self)
     }
     
     func configure(with model: DeckModel) {
