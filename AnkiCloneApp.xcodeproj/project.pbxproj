@@ -35,6 +35,7 @@
 		333551332AC282130025C29E /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 333551312AC282130025C29E /* CoreData.xcdatamodeld */; };
 		333551352AC282140025C29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333551342AC282140025C29E /* Assets.xcassets */; };
 		333551382AC282140025C29E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333551362AC282140025C29E /* LaunchScreen.storyboard */; };
+		3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E8122ACD112D00B45AD0 /* CircleCell.swift */; };
 		74E9871B5316A2BBFF27A3CB /* Pods_AnkiCloneApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B4AC70C3DB30320494CEDE /* Pods_AnkiCloneApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		333551342AC282140025C29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333551372AC282140025C29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333551392AC282140025C29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B86E8122ACD112D00B45AD0 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		57B4AC70C3DB30320494CEDE /* Pods_AnkiCloneApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnkiCloneApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		949E3A0B8137D154A4772972 /* Pods-AnkiCloneApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnkiCloneApp.debug.xcconfig"; path = "Target Support Files/Pods-AnkiCloneApp/Pods-AnkiCloneApp.debug.xcconfig"; sourceTree = "<group>"; };
 		EC66CC9B95F4473BB9666604 /* Pods-AnkiCloneApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnkiCloneApp.release.xcconfig"; path = "Target Support Files/Pods-AnkiCloneApp/Pods-AnkiCloneApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				331A57552AC28B3D0044A94C /* HomeView.swift */,
+				3B86E8122ACD112D00B45AD0 /* CircleCell.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -255,7 +258,6 @@
 				949E3A0B8137D154A4772972 /* Pods-AnkiCloneApp.debug.xcconfig */,
 				EC66CC9B95F4473BB9666604 /* Pods-AnkiCloneApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -318,7 +320,7 @@
 			);
 			mainGroup = 3335511C2AC282130025C29E;
 			packageReferences = (
-				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				331A57492AC284940044A94C /* XCRemoteSwiftPackageReference "Publishable" */,
 				331A574C2AC284E00044A94C /* XCRemoteSwiftPackageReference "EventBus" */,
 			);
@@ -394,6 +396,7 @@
 				331A57742AC297350044A94C /* UIView+Ext.swift in Sources */,
 				331A57722AC297160044A94C /* UserDefaultsStorage.swift in Sources */,
 				331A57632AC2913C0044A94C /* StudyView.swift in Sources */,
+				3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */,
 				3335512B2AC282130025C29E /* SceneDelegate.swift in Sources */,
 				331A57832AC2996B0044A94C /* SettingModel.swift in Sources */,
 			);
@@ -620,7 +623,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -649,7 +652,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		331A57452AC2844A0044A94C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		331A574A2AC284940044A94C /* Publishable */ = {

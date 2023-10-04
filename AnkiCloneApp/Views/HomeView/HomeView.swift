@@ -4,12 +4,15 @@ import UIKit
 
 final class HomeView: UIView, RootView {
     
+    var decks: [DeckModel] = []
+    
     private lazy var settingButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "gearshape")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         button.setImage(image, for: .normal)
         button.tintColor = .black
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         return button
     }()
     
@@ -25,6 +28,8 @@ final class HomeView: UIView, RootView {
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowColor = UIColor.black.cgColor
+        
+        button.addTarget(self, action: #selector(didTapFloatingButton), for: .touchUpInside)
         return button
     }()
     
@@ -41,9 +46,28 @@ final class HomeView: UIView, RootView {
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowColor = UIColor.black.cgColor
         button.alpha = 0
+        button.addTarget(self, action: #selector(didTapWriteButton), for: .touchUpInside)
         
         return button
     }()
+    
+    let homeCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 30
+        layout.minimumInteritemSpacing = 10
+        layout.itemSize = CGSize(width: 150, height: 210)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(CircleCell.self, forCellWithReuseIdentifier: "circleCell")
+        return collectionView
+    }()
+    
+
+    
+    
     
     private var isActive: Bool = false {
         didSet {
@@ -53,8 +77,16 @@ final class HomeView: UIView, RootView {
     
     private var animation: UIViewPropertyAnimator?
     
+    
     func initializeUI() {
         backgroundColor = .systemBackground
+        
+
+        
+        homeCollectionView.delegate = self
+        homeCollectionView.dataSource = self
+        homeCollectionView.allowsSelection = true
+        
         
         
         setUI()
@@ -67,6 +99,7 @@ final class HomeView: UIView, RootView {
         addSubview(settingButton)
         addSubview(floatingButton)
         addSubview(writeButton)
+        addSubview(homeCollectionView)
         
         settingButton.snp.makeConstraints { make in
             make.width.equalTo(37)
@@ -87,7 +120,17 @@ final class HomeView: UIView, RootView {
             make.rightMargin.equalToSuperview().offset(-20)
         }
         
+        homeCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(settingButton.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(35)
+            make.right.equalToSuperview().offset(-35)
+            make.bottom.equalToSuperview()
+        }
+        
+       
+        
     }
+    
     @objc private func didTapSettingButton() {
         print("settingButtonTapped")
         EventBus.shared.emit(PushToSettingScreenEvent())
@@ -95,6 +138,11 @@ final class HomeView: UIView, RootView {
     
     @objc private func didTapFloatingButton() {
         isActive.toggle()
+    }
+    
+    @objc private func didTapWriteButton() {
+        EventBus.shared.emit(ShowCreateCellAlertEvent())
+
     }
     
     private func showActionButtons() {
@@ -131,6 +179,5 @@ final class HomeView: UIView, RootView {
         floatingButton.layer.add(animation, forKey: nil)
     }
 }
-
 
 
