@@ -9,6 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
 
         SettingService.shared.storage = UserDefaultsStorage.shared
+        DeckService.shared.storage = UserDefaultsStorage.shared
         window?.rootViewController = MainViewController()
     }
 

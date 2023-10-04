@@ -29,6 +29,9 @@
 		331A577F2AC299120044A94C /* DeckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A577E2AC299120044A94C /* DeckService.swift */; };
 		331A57812AC2991A0044A94C /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57802AC2991A0044A94C /* SettingService.swift */; };
 		331A57832AC2996B0044A94C /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57822AC2996B0044A94C /* SettingModel.swift */; };
+		331A57852AC2CBCA0044A94C /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57842AC2CBCA0044A94C /* FlashCardModel.swift */; };
+		331A57872AC2CE750044A94C /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57862AC2CE750044A94C /* FlashCard.swift */; };
+		331A57892AC2CF0D0044A94C /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331A57882AC2CF0D0044A94C /* Date+Ext.swift */; };
 		333551292AC282130025C29E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333551282AC282130025C29E /* AppDelegate.swift */; };
 		3335512B2AC282130025C29E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335512A2AC282130025C29E /* SceneDelegate.swift */; };
 		3335512D2AC282130025C29E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335512C2AC282130025C29E /* MainViewController.swift */; };
@@ -38,6 +41,7 @@
 		C39346102AC9CE06005DF1D3 /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393460F2AC9CE06005DF1D3 /* WordCardView.swift */; };
 		C39346122AC9CFDD005DF1D3 /* WordAnswerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */; };
 		C39346142ACA795F005DF1D3 /* TimeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346132ACA795F005DF1D3 /* TimeStackView.swift */; };
+		33EE74202ACCFC90004E1BB6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +64,9 @@
 		331A577E2AC299120044A94C /* DeckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckService.swift; sourceTree = "<group>"; };
 		331A57802AC2991A0044A94C /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
 		331A57822AC2996B0044A94C /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		331A57842AC2CBCA0044A94C /* FlashCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
+		331A57862AC2CE750044A94C /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
+		331A57882AC2CF0D0044A94C /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		333551252AC282130025C29E /* AnkiCloneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnkiCloneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		333551282AC282130025C29E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3335512A2AC282130025C29E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 		C393460F2AC9CE06005DF1D3 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
 		C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnswerCardView.swift; sourceTree = "<group>"; };
 		C39346132ACA795F005DF1D3 /* TimeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStackView.swift; sourceTree = "<group>"; };
+		33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +154,7 @@
 				331A57732AC297350044A94C /* UIView+Ext.swift */,
 				331A57662AC2958C0044A94C /* UIViewController+Ext.swift */,
 				331A57752AC2975A0044A94C /* UIResponder+Ext.swift */,
+				331A57882AC2CF0D0044A94C /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -153,6 +162,7 @@
 		331A57682AC295FE0044A94C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				331A57842AC2CBCA0044A94C /* FlashCardModel.swift */,
 				331A576A2AC2961A0044A94C /* DeckModel.swift */,
 				331A57822AC2996B0044A94C /* SettingModel.swift */,
 			);
@@ -162,6 +172,8 @@
 		331A57692AC296050044A94C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */,
+				331A57862AC2CE750044A94C /* FlashCard.swift */,
 				331A576C2AC2969B0044A94C /* Deck.swift */,
 			);
 			path = ViewModels;
@@ -331,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331A57852AC2CBCA0044A94C /* FlashCardModel.swift in Sources */,
 				331A576B2AC2961A0044A94C /* DeckModel.swift in Sources */,
 				331A57612AC291270044A94C /* StudyViewController.swift in Sources */,
 				331A57672AC2958C0044A94C /* UIViewController+Ext.swift in Sources */,
@@ -341,11 +354,14 @@
 				C39346102AC9CE06005DF1D3 /* WordCardView.swift in Sources */,
 				331A575D2AC28C900044A94C /* SettingView.swift in Sources */,
 				331A57592AC28BFC0044A94C /* HomeViewController.swift in Sources */,
+				331A57872AC2CE750044A94C /* FlashCard.swift in Sources */,
+				33EE74202ACCFC90004E1BB6 /* ViewModel.swift in Sources */,
 				331A575F2AC28CA60044A94C /* SettingViewController.swift in Sources */,
 				331A57542AC285AF0044A94C /* RootView.swift in Sources */,
 				331A577F2AC299120044A94C /* DeckService.swift in Sources */,
 				331A57762AC2975A0044A94C /* UIResponder+Ext.swift in Sources */,
 				333551292AC282130025C29E /* AppDelegate.swift in Sources */,
+				331A57892AC2CF0D0044A94C /* Date+Ext.swift in Sources */,
 				333551332AC282130025C29E /* CoreData.xcdatamodeld in Sources */,
 				331A576D2AC2969B0044A94C /* Deck.swift in Sources */,
 				C39346122AC9CFDD005DF1D3 /* WordAnswerCardView.swift in Sources */,
