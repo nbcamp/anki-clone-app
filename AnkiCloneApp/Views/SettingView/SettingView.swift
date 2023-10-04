@@ -1,4 +1,5 @@
 import SnapKit
+import EventBus
 import UIKit
 
 final class SettingView: UIView, RootView {
@@ -21,6 +22,17 @@ final class SettingView: UIView, RootView {
         tableView.tableFooterView = UIView()
         
         return tableView
+    }()
+    
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        
+        datePicker.datePickerMode = .time
+        datePicker.locale = Locale(identifier: "ko_KR")
+        datePicker.date = SettingService.shared.setting.reminderTime // 현재 reminderTime
+        datePicker.minuteInterval = 15 // 15분으로 할거면 디폴트 리마인더 타임을 9:00 으로 수정해야함
+        
+        return datePicker
     }()
     
     override init(frame: CGRect) {
@@ -56,29 +68,45 @@ extension SettingView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-        var config = cell.defaultContentConfiguration()
-        
-        switch indexPath.row {
-        case 0:
-            config.text = "알림 관리" // viewModel.title
-            config.secondaryText = "매일" // viewModel.secondaryText
-        case 1:
-            config.text = "기본 리마인더 시간"
-            config.secondaryText = "9:00 오전"
-        case 2:
-            let switchView = UISwitch()
+        if indexPath.row == 1 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "datePickerCell")
+            
+            cell.contentView.addSubview(datePicker)
+            
+            datePicker.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview().offset(-16)
+            }
 
-            config.text = "앱 내 알림 표시"
-            cell.accessoryView = switchView
-        default:
-            break
+            cell.textLabel?.text = "기본 리마인더 시간"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "hh:mm a"
+            let formattedTime = dateFormatter.string(from: datePicker.date)
+            cell.detailTextLabel?.text = formattedTime
+            
+            return cell
+        } else {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+            var config = cell.defaultContentConfiguration()
+            
+            switch indexPath.row {
+            case 0:
+                config.text = "알림 관리" // viewModel.title
+                config.secondaryText = "매일" // viewModel.secondaryText
+            case 2:
+                let switchView = UISwitch()
+
+                config.text = "앱 내 알림 표시"
+                cell.accessoryView = switchView
+            default:
+                break
+            }
+            
+            cell.contentConfiguration = config
+            cell.accessoryType = .disclosureIndicator
+            
+            return cell
         }
-        
-        cell.contentConfiguration = config
-        cell.accessoryType = .disclosureIndicator
-        
-        return cell
     }
 }
 
@@ -89,9 +117,9 @@ extension SettingView: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             // Action Sheet
+            EventBus.shared.emit(ShowNotificationManagementActionEvent())
             break
         case 1:
-            // Time Picker로 시간 업데이트
             break
         default:
             break
