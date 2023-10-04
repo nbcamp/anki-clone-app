@@ -26,5 +26,6 @@ extension FlashCard {
 }
 
 extension FlashCard {
+    var forgotDate: Date { .init(unixtime: forgotAt) }
     var createdDate: Date { .init(unixtime: createdAt) }
 }

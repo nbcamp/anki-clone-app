@@ -7,6 +7,8 @@ final class Deck: ViewModel {
     @Publishable var flashCards: [FlashCard]
     let createdAt: UInt64
 
+    var studies: [FlashCard] { flashCards.filter { !$0.memorized } }
+
     init(id: String? = nil, title: String, createdAt: UInt64? = nil, with flashCards: [FlashCard] = []) {
         self.id = id ?? UUID().uuidString
         self.title = title

@@ -9,12 +9,13 @@ final class DeckService {
     private lazy var key = String(describing: self)
     var storage: Storage? { didSet { decks = load() } }
 
-    func flashCards(of deck: Deck) -> [FlashCard] {
-        deck.flashCards.filter { !$0.memorized }
-    }
-
     func create(deck: Deck) {
         decks.append(deck)
+        save(decks: decks)
+    }
+
+    func create(card: FlashCard) {
+        card.deck.flashCards.append(card)
         save(decks: decks)
     }
 
