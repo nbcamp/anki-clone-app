@@ -2,7 +2,7 @@ import EventBus
 import SnapKit
 import UIKit
 
-final class HomeView: UIView, RootView {
+final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionViewDataSource, CircleCellDelegate {
     
     var decks: [DeckModel] = []
     
@@ -79,9 +79,8 @@ final class HomeView: UIView, RootView {
     
     
     func initializeUI() {
-        backgroundColor = .systemBackground
         
-
+        backgroundColor = .systemBackground
         
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
@@ -177,6 +176,30 @@ final class HomeView: UIView, RootView {
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
         floatingButton.layer.add(animation, forKey: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return decks.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "circleCell", for: indexPath) as! CircleCell
+        cell.delegate = self
+        let deck = decks[indexPath.row]
+                cell.configure(with: deck)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        EventBus.shared.emit(CellTappedEvent())
+    }
+    
+    func didTapDeleteButton(in cell: CircleCell) {
+        
+        print("Delete button tapped")
+        guard let indexPath = homeCollectionView.indexPath(for: cell) else { return }
+        decks.remove(at: indexPath.row)
+        homeCollectionView.deleteItems(at: [indexPath])
     }
 }
 

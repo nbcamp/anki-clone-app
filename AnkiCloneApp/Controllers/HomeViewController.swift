@@ -50,8 +50,10 @@ final class HomeViewController: RootViewController<HomeView> {
 
                 // 새로운 DataModel 생성 및 배열에 추가
             let newItem = DeckModel(id: UUID().uuidString, title: deckTitle, createdAt: Int(Date().timeIntervalSince1970))
-                self?.rootView.decks.append(newItem)
+            self?.rootView.decks.append(newItem)
                 self?.rootView.homeCollectionView.reloadData()
+            
+
             }
 
             let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)

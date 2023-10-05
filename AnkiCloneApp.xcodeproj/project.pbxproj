@@ -36,7 +36,6 @@
 		333551352AC282140025C29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333551342AC282140025C29E /* Assets.xcassets */; };
 		333551382AC282140025C29E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333551362AC282140025C29E /* LaunchScreen.storyboard */; };
 		3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E8122ACD112D00B45AD0 /* CircleCell.swift */; };
-		74E9871B5316A2BBFF27A3CB /* Pods_AnkiCloneApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B4AC70C3DB30320494CEDE /* Pods_AnkiCloneApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,9 +67,6 @@
 		333551372AC282140025C29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333551392AC282140025C29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B86E8122ACD112D00B45AD0 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
-		57B4AC70C3DB30320494CEDE /* Pods_AnkiCloneApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnkiCloneApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		949E3A0B8137D154A4772972 /* Pods-AnkiCloneApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnkiCloneApp.debug.xcconfig"; path = "Target Support Files/Pods-AnkiCloneApp/Pods-AnkiCloneApp.debug.xcconfig"; sourceTree = "<group>"; };
-		EC66CC9B95F4473BB9666604 /* Pods-AnkiCloneApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnkiCloneApp.release.xcconfig"; path = "Target Support Files/Pods-AnkiCloneApp/Pods-AnkiCloneApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +77,6 @@
 				331A574E2AC284E00044A94C /* EventBus in Frameworks */,
 				331A57462AC2844A0044A94C /* SnapKit in Frameworks */,
 				331A574B2AC284940044A94C /* Publishable in Frameworks */,
-				74E9871B5316A2BBFF27A3CB /* Pods_AnkiCloneApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +185,6 @@
 				333551272AC282130025C29E /* AnkiCloneApp */,
 				333551262AC282130025C29E /* Products */,
 				8531CD97477FA7E2150065B0 /* Pods */,
-				F56011B2EDD982782F6FE158 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,18 +249,8 @@
 		8531CD97477FA7E2150065B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				949E3A0B8137D154A4772972 /* Pods-AnkiCloneApp.debug.xcconfig */,
-				EC66CC9B95F4473BB9666604 /* Pods-AnkiCloneApp.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		F56011B2EDD982782F6FE158 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				57B4AC70C3DB30320494CEDE /* Pods_AnkiCloneApp.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +260,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3335513C2AC282140025C29E /* Build configuration list for PBXNativeTarget "AnkiCloneApp" */;
 			buildPhases = (
-				8AAE98479190526E9740727D /* [CP] Check Pods Manifest.lock */,
 				333551212AC282130025C29E /* Sources */,
 				333551222AC282130025C29E /* Frameworks */,
 				333551232AC282130025C29E /* Resources */,
@@ -320,7 +303,7 @@
 			);
 			mainGroup = 3335511C2AC282130025C29E;
 			packageReferences = (
-				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */,
 				331A57492AC284940044A94C /* XCRemoteSwiftPackageReference "Publishable" */,
 				331A574C2AC284E00044A94C /* XCRemoteSwiftPackageReference "EventBus" */,
 			);
@@ -344,31 +327,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8AAE98479190526E9740727D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AnkiCloneApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		333551212AC282130025C29E /* Sources */ = {
@@ -537,7 +495,6 @@
 		};
 		3335513D2AC282140025C29E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 949E3A0B8137D154A4772972 /* Pods-AnkiCloneApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -569,7 +526,6 @@
 		};
 		3335513E2AC282140025C29E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC66CC9B95F4473BB9666604 /* Pods-AnkiCloneApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -623,7 +579,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -652,7 +608,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		331A57452AC2844A0044A94C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 		331A574A2AC284940044A94C /* Publishable */ = {
