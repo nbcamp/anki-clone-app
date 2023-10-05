@@ -7,7 +7,7 @@ final class SettingService {
     
     private lazy var key: String = .init(describing: self)
     var storage: Storage? { didSet { setting = load() ?? setting }}
-    private(set) var setting: SettingViewModel = .init(notificationOption: .everyday, reminderTime: Date(), isShowInAppNotifications: true)
+    private(set) var setting: SettingViewModel = .init(notificationOption: .everyday, reminderTime: Date(), isShowInAppNotifications: false)
     
     func updateNotificationOption(_ newOption: NotificationOption) {
         let newSetting = setting
@@ -59,12 +59,79 @@ extension SettingService {
         }
     }
     
-    private func cancelDailyNotification() {
+    func setUserNotificationSettings() {
+            switch setting.notificationOption {
+            case .everyday:
+                sendEverydayNoti()
+            case .weekdays:
+                setWeekdaysNoti()
+            case .none:
+                cancelNoti()
+            }
+        }
+    
+    private func cancelNoti() {
         let notificationCenter = UNUserNotificationCenter.current()
         
         notificationCenter.removeAllPendingNotificationRequests()
     }
     
+    func sendEverydayNoti() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "오늘도 Anki와 함께 공부해봐요!"
+        content.body = "터치하면 앱의 메인 화면으로 이동합니다."
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: setting.reminderTime), repeats: true)
+        
+        let request = UNNotificationRequest(
+            identifier: "sendEverydayNoti",
+            content: content,
+            trigger: trigger
+        )
+        
+        if setting.notificationOption != .none {
+            notificationCenter.add(request) { (error) in
+                if error != nil {}
+            }
+        }
+    }
+    
+    func setWeekdaysNoti() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "오늘도 Anki와 함께 공부해봐요!"
+        content.body = "터치하면 앱의 메인 화면으로 이동합니다."
+        
+        // Calendar 객체를 사용하여 현재 날짜의 요일 가져옴
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: Date())
+        
+        if 2...6 ~= weekday { // 월요일(2)부터 금요일(6)까지만 trigger
+            let triggerDate = calendar.dateComponents([.hour, .minute], from: setting.reminderTime)
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+            
+            let request = UNNotificationRequest(
+                identifier: "sendWeekdaysNoti",
+                content: content,
+                trigger: trigger
+            )
+            
+            if setting.notificationOption != .none {
+                notificationCenter.add(request) { (error) in
+                    if error != nil {}
+                }
+            }
+        }
+    }
+
     func sendTestNoti() {
         let notificationCenter = UNUserNotificationCenter.current()
         
@@ -75,8 +142,8 @@ extension SettingService {
         content.title = "오늘도 Anki와 함께 공부해봐요!"
         content.body = "터치하면 앱의 메인 화면으로 이동합니다."
         
-        // 2. 발동조건 작성 -> trigger
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // 2. 발동조건 작성 -> trigger / 토글 3초 후
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         //let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: setting.reminderTime), repeats: true)
         
         // 3. 요청 작성 -> request
