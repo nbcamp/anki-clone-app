@@ -5,12 +5,21 @@ struct PushToSettingScreenEvent: EventProtocol {
     let payload: Void = ()
 }
 
-struct ShowCreateCellAlertEvent: EventProtocol {
+struct ShowCreateNewDeckAlertEvent: EventProtocol {
     let payload: (String) -> Void
 }
 
-struct CellTappedEvent: EventProtocol {
+struct PushToDetailDeckScreenEvent: EventProtocol {
     let payload: Void = ()
+}
+
+struct ShowDeleteDeckAlertEvent: EventProtocol {
+    struct Payload {
+        let deck: Deck
+        let completionHandler: () -> Void
+    }
+
+    let payload: Payload
 }
 
 final class HomeViewController: RootViewController<HomeView> {
@@ -23,12 +32,24 @@ final class HomeViewController: RootViewController<HomeView> {
             listener.navigationController?.pushViewController(SettingViewController(), animated: true)
         }
 
-        EventBus.shared.on(ShowCreateCellAlertEvent.self, by: self) { listener, payload in
+        EventBus.shared.on(ShowCreateNewDeckAlertEvent.self, by: self) { listener, payload in
             listener.showCreateCellAlert(completion: payload)
         }
 
-        EventBus.shared.on(CellTappedEvent.self, by: self) { listener, _ in
+        EventBus.shared.on(PushToDetailDeckScreenEvent.self, by: self) { listener, _ in
             listener.navigationController?.pushViewController(StudyViewController(), animated: true)
+        }
+
+        EventBus.shared.on(ShowDeleteDeckAlertEvent.self, by: self) { listener, payload in
+            let alert = UIAlertController(title: nil, message: "삭제하시겠습니까?", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                DeckService.shared.remove(deck: payload.deck)
+                payload.completionHandler()
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            listener.present(alert, animated: true)
         }
     }
 

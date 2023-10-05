@@ -19,6 +19,12 @@ final class DeckService {
         save(decks: decks)
     }
 
+    func remove(deck: Deck) {
+        guard let index = decks.firstIndex(of: deck) else { return }
+        decks.remove(at: index)
+        save(decks: decks)
+    }
+
     func remind(_ flashCard: FlashCard, after: TimeInterval) {
         flashCard.forgotAt += .init(after)
         save(decks: decks)

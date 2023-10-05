@@ -75,7 +75,7 @@ class CircleCell: UICollectionViewCell {
 
     func configure(with deck: Deck) {
         titleLabel.text = deck.title
-        createdLabel.text = String(deck.createdAt)
+        createdLabel.text = deck.createdDate.format()
     }
 
     private func setupCell() {

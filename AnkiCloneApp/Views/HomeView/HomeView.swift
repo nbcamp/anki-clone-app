@@ -127,7 +127,7 @@ final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionVi
     }
 
     @objc private func didTapWriteButton() {
-        EventBus.shared.emit(ShowCreateCellAlertEvent(payload: { [weak self] _ in
+        EventBus.shared.emit(ShowCreateNewDeckAlertEvent(payload: { [weak self] _ in
             self?.homeCollectionView.reloadData()
         }))
     }
@@ -178,12 +178,15 @@ final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        EventBus.shared.emit(CellTappedEvent())
+        EventBus.shared.emit(PushToDetailDeckScreenEvent())
     }
 
     func didTapDeleteButton(in cell: CircleCell) {
         guard let indexPath = homeCollectionView.indexPath(for: cell) else { return }
-        decks.remove(at: indexPath.row)
-        homeCollectionView.deleteItems(at: [indexPath])
+        EventBus.shared.emit(ShowDeleteDeckAlertEvent(payload: .init(deck: decks[indexPath.item]) { [weak self] in
+            guard let self, let indexPath = self.homeCollectionView.indexPath(for: cell) else { return }
+            decks.remove(at: indexPath.row)
+            homeCollectionView.deleteItems(at: [indexPath])
+        }))
     }
 }

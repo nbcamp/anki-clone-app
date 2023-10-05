@@ -9,4 +9,10 @@ extension Date {
     init(unixtime: UInt64) {
         self.init(timeIntervalSince1970: TimeInterval(unixtime))
     }
+
+    func format(_ dateFormat: String = "yy.MM.dd") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self)
+    }
 }
