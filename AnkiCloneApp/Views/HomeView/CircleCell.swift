@@ -73,9 +73,9 @@ class CircleCell: UICollectionViewCell {
         delegate?.didTapDeleteButton(in: self)
     }
 
-    func configure(with model: DeckModel) {
-//        titleLabel.text = model.title
-//        createdLabel.text = model.createdAt
+    func configure(with deck: Deck) {
+        titleLabel.text = deck.title
+        createdLabel.text = String(deck.createdAt)
     }
 
     private func setupCell() {

@@ -6,7 +6,7 @@ struct PushToSettingScreenEvent: EventProtocol {
 }
 
 struct ShowCreateCellAlertEvent: EventProtocol {
-    let payload: Void = ()
+    let payload: (String) -> Void
 }
 
 struct CellTappedEvent: EventProtocol {
@@ -16,15 +16,15 @@ struct CellTappedEvent: EventProtocol {
 final class HomeViewController: RootViewController<HomeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootView.decks = DeckService.shared.decks
         SettingService.shared.requestNotificationAuthorization() // 푸시알림 권한요청
-        
+
         EventBus.shared.on(PushToSettingScreenEvent.self, by: self) { listener, _ in
             listener.navigationController?.pushViewController(SettingViewController(), animated: true)
         }
 
-        EventBus.shared.on(ShowCreateCellAlertEvent.self, by: self) { listener, _ in
-            listener.showCreateCellAlert()
+        EventBus.shared.on(ShowCreateCellAlertEvent.self, by: self) { listener, payload in
+            listener.showCreateCellAlert(completion: payload)
         }
 
         EventBus.shared.on(CellTappedEvent.self, by: self) { listener, _ in
@@ -32,7 +32,7 @@ final class HomeViewController: RootViewController<HomeView> {
         }
     }
 
-    private func showCreateCellAlert() {
+    private func showCreateCellAlert(completion: @escaping (String) -> Void) {
         let alertController = UIAlertController(title: "단어장 추가하기", message: "단어장 이름을 작성해주세요.", preferredStyle: .alert)
 
         alertController.addTextField { textField in
@@ -45,10 +45,9 @@ final class HomeViewController: RootViewController<HomeView> {
                 return
             }
 
-            // 새로운 DataModel 생성 및 배열에 추가
-//            let newItem =
-//            self?.rootView.decks.append(newItem)
-//                self?.rootView.homeCollectionView.reloadData()
+            DeckService.shared.create(deck: .init(title: deckTitle))
+            self?.rootView.decks = DeckService.shared.decks
+            completion(deckTitle)
         }
 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
