@@ -184,7 +184,6 @@
 			children = (
 				333551272AC282130025C29E /* AnkiCloneApp */,
 				333551262AC282130025C29E /* Products */,
-				8531CD97477FA7E2150065B0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,13 +243,6 @@
 				331A575A2AC28C6E0044A94C /* StudyView */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		8531CD97477FA7E2150065B0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
