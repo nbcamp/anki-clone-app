@@ -303,7 +303,7 @@
 			);
 			mainGroup = 3335511C2AC282130025C29E;
 			packageReferences = (
-				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				331A57492AC284940044A94C /* XCRemoteSwiftPackageReference "Publishable" */,
 				331A574C2AC284E00044A94C /* XCRemoteSwiftPackageReference "EventBus" */,
 			);
