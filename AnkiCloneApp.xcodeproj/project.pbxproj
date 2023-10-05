@@ -270,7 +270,7 @@
 			);
 			name = AnkiCloneApp;
 			packageProductDependencies = (
-				331A57452AC2844A0044A94C /* SnapKit */,
+				331A57452AC2844A0044A94C /* SnapKit.git */,
 				331A574A2AC284940044A94C /* Publishable */,
 				331A574D2AC284E00044A94C /* EventBus */,
 			);
