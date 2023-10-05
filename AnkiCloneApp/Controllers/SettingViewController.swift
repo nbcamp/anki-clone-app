@@ -33,6 +33,7 @@ final class SettingViewController: RootViewController<SettingView> {
         
         EventBus.shared.on(SwitchValueChangedEvent.self, by: self) { listener, payload in
             listener.handleSwitchValueChanged(payload)
+            SettingService.shared.sendTestNoti() // false로 변경했을 때 앱 내 알림 안보이는것 테스트
         }
     }
     

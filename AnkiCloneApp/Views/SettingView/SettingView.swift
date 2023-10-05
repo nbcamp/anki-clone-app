@@ -89,6 +89,7 @@ extension SettingView: UITableViewDataSource {
                 let switchView = UISwitch()
                 
                 config.text = setting?.showInAppNotificationsTitle
+                switchView.isOn = setting?.isShowInAppNotifications ?? true
                 cell.accessoryView = switchView
                 
                 switchView.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
