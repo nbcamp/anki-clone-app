@@ -12,8 +12,8 @@ struct ShowNotificationManagementActionEvent: EventProtocol {
 final class SettingViewController: RootViewController<SettingView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "설정"
         rootView.setting = SettingService.shared.setting
+        title = rootView.setting?.viewControllerTitle
         
         EventBus.shared.on(ShowNotificationManagementActionEvent.self, by: self) { listener, payload in
             listener.showNotificationManagementActionSheet(completionHandler: payload.completionHandler)

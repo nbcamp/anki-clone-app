@@ -2,8 +2,6 @@ import SnapKit
 import EventBus
 import UIKit
 
-// view에서는 settingService 접근하면 안됨. 비즈니스 로직에 접근하는게 안됨
-
 final class SettingView: UIView, RootView {
     var setting: SettingViewModel?
     
@@ -73,11 +71,8 @@ extension SettingView: UITableViewDataSource {
                 make.right.equalToSuperview().offset(-16)
             }
 
-            cell.textLabel?.text = "기본 리마인더 시간"
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "hh:mm a"
-            let formattedTime = dateFormatter.string(from: datePicker.date)
-            cell.detailTextLabel?.text = formattedTime
+            cell.textLabel?.text = setting?.reminderTimeTitle
+            cell.detailTextLabel?.text = setting?.reminderTimeSecondaryText
             
             return cell
         } else {
@@ -86,12 +81,12 @@ extension SettingView: UITableViewDataSource {
             
             switch indexPath.row {
             case 0:
-                config.text = "알림 관리" // viewModel.title
-                config.secondaryText = setting?.notificationOption.rawValue // viewModel.secondaryText //
+                config.text = setting?.notificationOptionTitle
+                config.secondaryText = setting?.notificationOptionSecondaryText
             case 2:
                 let switchView = UISwitch()
 
-                config.text = "앱 내 알림 표시"
+                config.text = setting?.showInAppNotificationsTitle
                 cell.accessoryView = switchView
             default:
                 break
