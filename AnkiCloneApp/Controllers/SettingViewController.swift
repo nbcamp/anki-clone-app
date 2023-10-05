@@ -5,8 +5,12 @@ struct ShowNotificationManagementActionEvent: EventProtocol {
     struct Payload {
         let completionHandler: () -> Void
     }
-
+    
     let payload: Payload
+}
+
+struct DatePickerValueChangedEvent: EventProtocol {
+    let payload: Date
 }
 
 struct SwitchValueChangedEvent: EventProtocol {
@@ -21,6 +25,10 @@ final class SettingViewController: RootViewController<SettingView> {
         
         EventBus.shared.on(ShowNotificationManagementActionEvent.self, by: self) { listener, payload in
             listener.showNotificationManagementActionSheet(completionHandler: payload.completionHandler)
+        }
+        
+        EventBus.shared.on(DatePickerValueChangedEvent.self, by: self) { listener, payload in
+            listener.handleDatePickerValueChanged(payload)
         }
         
         EventBus.shared.on(SwitchValueChangedEvent.self, by: self) { listener, payload in
@@ -58,6 +66,11 @@ final class SettingViewController: RootViewController<SettingView> {
         actionSheet.addAction(cancelAction)
         
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func handleDatePickerValueChanged(_ date: Date) {
+        SettingService.shared.updateReminderTime(date)
+        print(SettingService.shared.setting.reminderTime) // 타임존 변경하기
     }
     
     private func handleSwitchValueChanged(_ isOn: Bool) {

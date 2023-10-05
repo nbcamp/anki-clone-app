@@ -34,6 +34,8 @@ final class SettingView: UIView, RootView {
         datePicker.date = SettingService.shared.setting.reminderTime // 현재 reminderTime
         datePicker.minuteInterval = 15 // 15분으로 할거면 디폴트 리마인더 타임을 9:00 으로 수정해야함
         
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
+
         return datePicker
     }()
     
@@ -99,6 +101,10 @@ extension SettingView: UITableViewDataSource {
             
             return cell
         }
+    }
+    
+    @objc private func datePickerValueChanged(_ sender: UIDatePicker) {
+        EventBus.shared.emit(DatePickerValueChangedEvent(payload: sender.date))
     }
     
     @objc private func switchValueChanged(_ sender: UISwitch) {
