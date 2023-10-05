@@ -85,9 +85,11 @@ extension SettingView: UITableViewDataSource {
                 config.secondaryText = setting?.notificationOptionSecondaryText
             case 2:
                 let switchView = UISwitch()
-
+                
                 config.text = setting?.showInAppNotificationsTitle
                 cell.accessoryView = switchView
+                
+                switchView.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
             default:
                 break
             }
@@ -97,6 +99,10 @@ extension SettingView: UITableViewDataSource {
             
             return cell
         }
+    }
+    
+    @objc private func switchValueChanged(_ sender: UISwitch) {
+        EventBus.shared.emit(SwitchValueChangedEvent(payload: sender.isOn))
     }
 }
 

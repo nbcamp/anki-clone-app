@@ -7,7 +7,11 @@ struct ShowNotificationManagementActionEvent: EventProtocol {
     }
 
     let payload: Payload
-} 
+}
+
+struct SwitchValueChangedEvent: EventProtocol {
+    let payload: Bool
+}
 
 final class SettingViewController: RootViewController<SettingView> {
     override func viewDidLoad() {
@@ -17,6 +21,10 @@ final class SettingViewController: RootViewController<SettingView> {
         
         EventBus.shared.on(ShowNotificationManagementActionEvent.self, by: self) { listener, payload in
             listener.showNotificationManagementActionSheet(completionHandler: payload.completionHandler)
+        }
+        
+        EventBus.shared.on(SwitchValueChangedEvent.self, by: self) { listener, payload in
+            listener.handleSwitchValueChanged(payload)
         }
     }
     
@@ -50,5 +58,9 @@ final class SettingViewController: RootViewController<SettingView> {
         actionSheet.addAction(cancelAction)
         
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func handleSwitchValueChanged(_ isOn: Bool) {
+        SettingService.shared.updateIsShowInAppNotifications(isOn)
     }
 }
