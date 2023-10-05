@@ -3,11 +3,27 @@ import UserNotifications
 
 final class SettingService {
     static let shared: SettingService = .init()
-    private init() {}
+    private init() { setupPublishing() }
     
     private lazy var key: String = .init(describing: self)
     var storage: Storage? { didSet { setting = load() ?? setting }}
-    private(set) var setting: SettingViewModel = .init(notificationOption: .everyday, reminderTime: Date(), isShowInAppNotifications: false)
+    private(set) var setting: SettingViewModel = .init(notificationOption: .everyday, reminderTime: Date(), isShowInAppNotifications: false) {
+        didSet {
+            setupPublishing()
+        }
+    }
+    
+    private func handleNotificationOptionChange(_ newValue: NotificationOption) {
+        setUserNotificationSettings() // 얘를 호출
+    }
+    
+    private func setupPublishing() {
+        setting.$notificationOption.unsubscribe(by: self) // 기존에 등록된거 제거
+        setting.$notificationOption.subscribe(by: self) { subscriber, changes in
+            subscriber.handleNotificationOptionChange(changes.new)
+            print("notificationOption changed from \(changes.old) to \(changes.new)")
+        }
+    }
     
     func updateNotificationOption(_ newOption: NotificationOption) {
         let newSetting = setting
@@ -50,7 +66,7 @@ extension SettingService {
     func requestNotificationAuthorization() {
         let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
         
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
             if granted {
                 print("알림 권한이 허용됨")
             } else {
@@ -60,15 +76,15 @@ extension SettingService {
     }
     
     func setUserNotificationSettings() {
-            switch setting.notificationOption {
-            case .everyday:
-                sendEverydayNoti()
-            case .weekdays:
-                setWeekdaysNoti()
-            case .none:
-                cancelNoti()
-            }
+        switch setting.notificationOption {
+        case .everyday:
+            sendEverydayNoti()
+        case .weekdays:
+            setWeekdaysNoti()
+        case .none:
+            cancelNoti()
         }
+    }
     
     private func cancelNoti() {
         let notificationCenter = UNUserNotificationCenter.current()
@@ -94,7 +110,7 @@ extension SettingService {
         )
         
         if setting.notificationOption != .none {
-            notificationCenter.add(request) { (error) in
+            notificationCenter.add(request) { error in
                 if error != nil {}
             }
         }
@@ -113,7 +129,7 @@ extension SettingService {
         let calendar = Calendar.current
         let weekday = calendar.component(.weekday, from: Date())
         
-        if 2...6 ~= weekday { // 월요일(2)부터 금요일(6)까지만 trigger
+        if 2 ... 6 ~= weekday { // 월요일(2)부터 금요일(6)까지만 trigger
             let triggerDate = calendar.dateComponents([.hour, .minute], from: setting.reminderTime)
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
@@ -125,7 +141,7 @@ extension SettingService {
             )
             
             if setting.notificationOption != .none {
-                notificationCenter.add(request) { (error) in
+                notificationCenter.add(request) { error in
                     if error != nil {}
                 }
             }
@@ -144,7 +160,6 @@ extension SettingService {
         
         // 2. 발동조건 작성 -> trigger / 토글 3초 후
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-        //let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: setting.reminderTime), repeats: true)
         
         // 3. 요청 작성 -> request
         let request = UNNotificationRequest(
@@ -154,7 +169,7 @@ extension SettingService {
         )
         
         if setting.notificationOption != .none {
-            notificationCenter.add(request) { (error) in
+            notificationCenter.add(request) { error in
                 if let error = error {
                     print("sendTestNoti: 실패 \(error.localizedDescription)")
                 } else {
