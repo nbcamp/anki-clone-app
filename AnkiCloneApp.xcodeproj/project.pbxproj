@@ -270,7 +270,7 @@
 			);
 			name = AnkiCloneApp;
 			packageProductDependencies = (
-				331A57452AC2844A0044A94C /* SnapKit.git */,
+				331A57452AC2844A0044A94C /* SnapKit */,
 				331A574A2AC284940044A94C /* Publishable */,
 				331A574D2AC284E00044A94C /* EventBus */,
 			);
@@ -579,7 +579,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -608,7 +608,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		331A57452AC2844A0044A94C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 331A57442AC2844A0044A94C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		331A574A2AC284940044A94C /* Publishable */ = {
