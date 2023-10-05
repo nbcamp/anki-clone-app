@@ -45,9 +45,9 @@
 		33EE74252ACEC42B004E1BB6 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74242ACEC42B004E1BB6 /* DeckView.swift */; };
 		33EE74272ACED557004E1BB6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74262ACED557004E1BB6 /* CircularProgressView.swift */; };
 		3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E8122ACD112D00B45AD0 /* CircleCell.swift */; };
-		C39346102AC9CE06005DF1D3 /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393460F2AC9CE06005DF1D3 /* WordCardView.swift */; };
-		C39346122AC9CFDD005DF1D3 /* WordAnswerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */; };
-		C39346142ACA795F005DF1D3 /* TimeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346132ACA795F005DF1D3 /* TimeStackView.swift */; };
+		C39346102AC9CE06005DF1D3 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393460F2AC9CE06005DF1D3 /* FlashCardView.swift */; };
+		C39346122AC9CFDD005DF1D3 /* FlashCardFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346112AC9CFDD005DF1D3 /* FlashCardFullView.swift */; };
+		C39346142ACA795F005DF1D3 /* RemindButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346132ACA795F005DF1D3 /* RemindButtonsView.swift */; };
 		DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7438252ACD12310066AC2A /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,9 +89,9 @@
 		33EE74242ACEC42B004E1BB6 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		33EE74262ACED557004E1BB6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		3B86E8122ACD112D00B45AD0 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
-		C393460F2AC9CE06005DF1D3 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
-		C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnswerCardView.swift; sourceTree = "<group>"; };
-		C39346132ACA795F005DF1D3 /* TimeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStackView.swift; sourceTree = "<group>"; };
+		C393460F2AC9CE06005DF1D3 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
+		C39346112AC9CFDD005DF1D3 /* FlashCardFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardFullView.swift; sourceTree = "<group>"; };
+		C39346132ACA795F005DF1D3 /* RemindButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindButtonsView.swift; sourceTree = "<group>"; };
 		DE7438252ACD12310066AC2A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,9 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				331A57622AC2913C0044A94C /* StudyView.swift */,
-				C393460F2AC9CE06005DF1D3 /* WordCardView.swift */,
-				C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */,
-				C39346132ACA795F005DF1D3 /* TimeStackView.swift */,
+				C393460F2AC9CE06005DF1D3 /* FlashCardView.swift */,
+				C39346112AC9CFDD005DF1D3 /* FlashCardFullView.swift */,
+				C39346132ACA795F005DF1D3 /* RemindButtonsView.swift */,
 			);
 			path = StudyView;
 			sourceTree = "<group>";
@@ -389,8 +389,8 @@
 				331A57512AC2857B0044A94C /* RootViewController.swift in Sources */,
 				331A57562AC28B3D0044A94C /* HomeView.swift in Sources */,
 				3335512D2AC282130025C29E /* MainViewController.swift in Sources */,
-				C39346142ACA795F005DF1D3 /* TimeStackView.swift in Sources */,
-				C39346102AC9CE06005DF1D3 /* WordCardView.swift in Sources */,
+				C39346142ACA795F005DF1D3 /* RemindButtonsView.swift in Sources */,
+				C39346102AC9CE06005DF1D3 /* FlashCardView.swift in Sources */,
 				331A575D2AC28C900044A94C /* SettingView.swift in Sources */,
 				331A57592AC28BFC0044A94C /* HomeViewController.swift in Sources */,
 				331A57872AC2CE750044A94C /* FlashCard.swift in Sources */,
@@ -406,7 +406,7 @@
 				331A57892AC2CF0D0044A94C /* Date+Ext.swift in Sources */,
 				333551332AC282130025C29E /* CoreData.xcdatamodeld in Sources */,
 				331A576D2AC2969B0044A94C /* Deck.swift in Sources */,
-				C39346122AC9CFDD005DF1D3 /* WordAnswerCardView.swift in Sources */,
+				C39346122AC9CFDD005DF1D3 /* FlashCardFullView.swift in Sources */,
 				331A57702AC296FD0044A94C /* Storage.swift in Sources */,
 				331A57812AC2991A0044A94C /* SettingService.swift in Sources */,
 				331A57782AC297720044A94C /* KeyboardHandler.swift in Sources */,

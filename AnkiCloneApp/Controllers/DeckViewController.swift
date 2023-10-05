@@ -5,7 +5,11 @@ struct PresentEditFlashCardScreenEvent: EventProtocol {
 }
 
 struct PushToStudyScreenEvent: EventProtocol {
-    let payload: Void = ()
+    struct Payload {
+        let deck: Deck
+    }
+
+    let payload: Payload
 }
 
 final class DeckViewController: RootViewController<DeckView> {
@@ -25,9 +29,17 @@ final class DeckViewController: RootViewController<DeckView> {
             subscriber.rootView.configure(with: deck)
         }
 
-        EventBus.shared.on(PushToStudyScreenEvent.self, by: self) { subscriber, _ in
+        EventBus.shared.on(PushToStudyScreenEvent.self, by: self) { subscriber, payload in
             let studyVC = StudyViewController()
+            studyVC.deck = payload.deck
             subscriber.navigationController?.pushViewController(studyVC, animated: true)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let deck {
+            rootView.configure(with: deck)
         }
     }
 }

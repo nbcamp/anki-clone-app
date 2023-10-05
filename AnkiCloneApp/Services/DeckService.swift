@@ -26,7 +26,7 @@ final class DeckService {
     }
 
     func remind(_ flashCard: FlashCard, after: TimeInterval) {
-        flashCard.forgotAt += .init(after)
+        flashCard.forgotAt = Date.now.unixtime + .init(after)
         save(decks: decks)
     }
 

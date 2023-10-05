@@ -3,6 +3,8 @@ import SnapKit
 import UIKit
 
 final class DeckView: UIView, RootView {
+    private(set) weak var deck: Deck?
+    
     private lazy var progressView = {
         let progressView = CircularProgressView()
         progressView.delegate = self
@@ -50,10 +52,11 @@ final class DeckView: UIView, RootView {
     }()
 
     func configure(with deck: Deck) {
+        self.deck = deck
         let rate = deck.rate
         progressRateLabel.text = "\(Int(rate * 100))%"
         statLabel.text = if deck.isEmpty { "새로운 단어를 추가해주세요!" }
-        else if deck.isCompleted { "모든 학습을 완료했습니다!" }
+        else if deck.isCompleted { "모든 학습(\(deck.flashCards.count)개)을 완료했습니다!" }
         else { "\(deck.flashCards.count)개의 카드 중 \(deck.studies.count)개의 학습이 필요합니다." }
 
         startButton.layer.opacity = deck.isEmpty ? 0.2 : 1.0
@@ -90,8 +93,7 @@ final class DeckView: UIView, RootView {
         addSubview(startButton)
         startButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.leading.equalTo(self).offset(20)
-            make.trailing.equalTo(self).offset(-20)
+            make.horizontalEdges.equalTo(self).inset(20)
             make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
         }
     }
@@ -101,7 +103,8 @@ final class DeckView: UIView, RootView {
     }
 
     @objc private func startStudyButtonTapped() {
-        EventBus.shared.emit(PushToStudyScreenEvent())
+        guard let deck else { return }
+        EventBus.shared.emit(PushToStudyScreenEvent(payload: .init(deck: deck)))
     }
 }
 
