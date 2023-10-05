@@ -178,7 +178,7 @@ final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        EventBus.shared.emit(PushToDetailDeckScreenEvent())
+        EventBus.shared.emit(PushToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
     }
 
     func didTapDeleteButton(in cell: CircleCell) {

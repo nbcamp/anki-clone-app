@@ -9,8 +9,12 @@ struct ShowCreateNewDeckAlertEvent: EventProtocol {
     let payload: (String) -> Void
 }
 
-struct PushToDetailDeckScreenEvent: EventProtocol {
-    let payload: Void = ()
+struct PushToDeckScreenEvent: EventProtocol {
+    struct Payload {
+        let deck: Deck
+    }
+    
+    let payload: Payload
 }
 
 struct ShowDeleteDeckAlertEvent: EventProtocol {
@@ -36,8 +40,10 @@ final class HomeViewController: RootViewController<HomeView> {
             listener.showCreateCellAlert(completion: payload)
         }
 
-        EventBus.shared.on(PushToDetailDeckScreenEvent.self, by: self) { listener, _ in
-            listener.navigationController?.pushViewController(StudyViewController(), animated: true)
+        EventBus.shared.on(PushToDeckScreenEvent.self, by: self) { listener, payload in
+            let deckVC = DeckViewController()
+            deckVC.deck = payload.deck
+            listener.navigationController?.pushViewController(deckVC, animated: true)
         }
 
         EventBus.shared.on(ShowDeleteDeckAlertEvent.self, by: self) { listener, payload in

@@ -40,12 +40,15 @@
 		333551332AC282130025C29E /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 333551312AC282130025C29E /* CoreData.xcdatamodeld */; };
 		333551352AC282140025C29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333551342AC282140025C29E /* Assets.xcassets */; };
 		333551382AC282140025C29E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333551362AC282140025C29E /* LaunchScreen.storyboard */; };
+		33EE74202ACCFC90004E1BB6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */; };
+		33EE74222ACEC400004E1BB6 /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74212ACEC400004E1BB6 /* DeckViewController.swift */; };
+		33EE74252ACEC42B004E1BB6 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74242ACEC42B004E1BB6 /* DeckView.swift */; };
+		33EE74272ACED557004E1BB6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74262ACED557004E1BB6 /* CircularProgressView.swift */; };
 		3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E8122ACD112D00B45AD0 /* CircleCell.swift */; };
-		DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7438252ACD12310066AC2A /* SettingViewModel.swift */; };
 		C39346102AC9CE06005DF1D3 /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393460F2AC9CE06005DF1D3 /* WordCardView.swift */; };
 		C39346122AC9CFDD005DF1D3 /* WordAnswerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */; };
 		C39346142ACA795F005DF1D3 /* TimeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346132ACA795F005DF1D3 /* TimeStackView.swift */; };
-		33EE74202ACCFC90004E1BB6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */; };
+		DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7438252ACD12310066AC2A /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,12 +84,15 @@
 		333551342AC282140025C29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333551372AC282140025C29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333551392AC282140025C29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		33EE74212ACEC400004E1BB6 /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
+		33EE74242ACEC42B004E1BB6 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
+		33EE74262ACED557004E1BB6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		3B86E8122ACD112D00B45AD0 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
-		DE7438252ACD12310066AC2A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		C393460F2AC9CE06005DF1D3 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
 		C39346112AC9CFDD005DF1D3 /* WordAnswerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnswerCardView.swift; sourceTree = "<group>"; };
 		C39346132ACA795F005DF1D3 /* TimeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStackView.swift; sourceTree = "<group>"; };
-		33EE741F2ACCFC90004E1BB6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DE7438252ACD12310066AC2A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				331A57532AC285AF0044A94C /* RootView.swift */,
+				33EE74262ACED557004E1BB6 /* CircularProgressView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -264,6 +271,7 @@
 				3335512C2AC282130025C29E /* MainViewController.swift */,
 				331A57582AC28BFC0044A94C /* HomeViewController.swift */,
 				331A575E2AC28CA60044A94C /* SettingViewController.swift */,
+				33EE74212ACEC400004E1BB6 /* DeckViewController.swift */,
 				331A57602AC291270044A94C /* StudyViewController.swift */,
 				039ED20A2ACC41F700138684 /* EditFlashViewController.swift */,
 			);
@@ -278,9 +286,18 @@
 				331A57572AC28B410044A94C /* HomeView */,
 				039ED20C2ACC425000138684 /* EditFlashCardView */,
 				331A575B2AC28C860044A94C /* SettingView */,
+				33EE74232ACEC41E004E1BB6 /* DeckView */,
 				331A575A2AC28C6E0044A94C /* StudyView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		33EE74232ACEC41E004E1BB6 /* DeckView */ = {
+			isa = PBXGroup;
+			children = (
+				33EE74242ACEC42B004E1BB6 /* DeckView.swift */,
+			);
+			path = DeckView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +384,7 @@
 				331A576B2AC2961A0044A94C /* DeckModel.swift in Sources */,
 				039ED20E2ACC43B600138684 /* EditFlashCardView.swift in Sources */,
 				331A57612AC291270044A94C /* StudyViewController.swift in Sources */,
+				33EE74272ACED557004E1BB6 /* CircularProgressView.swift in Sources */,
 				331A57672AC2958C0044A94C /* UIViewController+Ext.swift in Sources */,
 				331A57512AC2857B0044A94C /* RootViewController.swift in Sources */,
 				331A57562AC28B3D0044A94C /* HomeView.swift in Sources */,
@@ -376,8 +394,10 @@
 				331A575D2AC28C900044A94C /* SettingView.swift in Sources */,
 				331A57592AC28BFC0044A94C /* HomeViewController.swift in Sources */,
 				331A57872AC2CE750044A94C /* FlashCard.swift in Sources */,
+				33EE74222ACEC400004E1BB6 /* DeckViewController.swift in Sources */,
 				33EE74202ACCFC90004E1BB6 /* ViewModel.swift in Sources */,
 				331A575F2AC28CA60044A94C /* SettingViewController.swift in Sources */,
+				33EE74252ACEC42B004E1BB6 /* DeckView.swift in Sources */,
 				331A57542AC285AF0044A94C /* RootView.swift in Sources */,
 				331A577F2AC299120044A94C /* DeckService.swift in Sources */,
 				039ED20B2ACC41F700138684 /* EditFlashViewController.swift in Sources */,
