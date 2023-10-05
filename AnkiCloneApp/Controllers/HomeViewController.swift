@@ -16,6 +16,9 @@ struct CellTappedEvent: EventProtocol {
 final class HomeViewController: RootViewController<HomeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SettingService.shared.requestNotificationAuthorization()
+        SettingService.shared.sendTestNoti()
 
         EventBus.shared.on(PushToSettingScreenEvent.self, by: self) { listener, _ in
             listener.navigationController?.pushViewController(SettingViewController(), animated: true)
