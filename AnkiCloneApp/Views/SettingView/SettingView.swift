@@ -2,7 +2,11 @@ import SnapKit
 import EventBus
 import UIKit
 
+// view에서는 settingService 접근하면 안됨. 비즈니스 로직에 접근하는게 안됨
+
 final class SettingView: UIView, RootView {
+    var setting: SettingViewModel?
+    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         
@@ -34,15 +38,6 @@ final class SettingView: UIView, RootView {
         
         return datePicker
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func initializeUI() {
         backgroundColor = .systemBackground
@@ -92,7 +87,7 @@ extension SettingView: UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 config.text = "알림 관리" // viewModel.title
-                config.secondaryText = "매일" // viewModel.secondaryText
+                config.secondaryText = setting?.notificationOption.rawValue // viewModel.secondaryText //
             case 2:
                 let switchView = UISwitch()
 
@@ -117,7 +112,9 @@ extension SettingView: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             // Action Sheet
-            EventBus.shared.emit(ShowNotificationManagementActionEvent())
+            EventBus.shared.emit(ShowNotificationManagementActionEvent(payload: .init(completionHandler: { [weak self] in
+                self?.tableView.reloadData()
+            })))
             break
         case 1:
             break

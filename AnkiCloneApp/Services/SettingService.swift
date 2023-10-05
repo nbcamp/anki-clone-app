@@ -6,11 +6,7 @@ final class SettingService {
     
     private lazy var key: String = .init(describing: self)
     var storage: Storage? { didSet { setting = load() ?? setting }}
-    var setting: SettingViewModel = .init(notificationOption: .none, reminderTime: Date(), isShowInAppNotifications: true)
-    
-    func getSetting() -> SettingViewModel {
-            return setting
-        }
+    private(set) var setting: SettingViewModel = .init(notificationOption: .none, reminderTime: Date(), isShowInAppNotifications: true)
     
     func updateNotificationOption(_ newOption: NotificationOption) {
         var newSetting = setting
