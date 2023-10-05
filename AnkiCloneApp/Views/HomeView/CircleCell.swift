@@ -28,7 +28,7 @@ class CircleCell: UICollectionViewCell {
     
     let deleteButton: UIButton = {
         let button = UIButton(type: .system)
-        let trashImage = UIImage(systemName: "trash.fill") // 쓰레기통 아이콘
+        let trashImage = UIImage(systemName: "trash.circle") // 쓰레기통 아이콘
         button.setImage(trashImage, for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
