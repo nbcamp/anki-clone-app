@@ -1,84 +1,105 @@
 import UIKit
 
-protocol CircleCellDelegate: AnyObject {
-    func didTapDeleteButton(in cell: CircleCell)
-}
-
 class CircleCell: UICollectionViewCell {
-    weak var delegate: CircleCellDelegate?
+    var deleteButtonTapped: ((_ cell: CircleCell) -> Void)?
 
-    private lazy var circleImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "book")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.borderWidth = 8
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.cornerRadius = 70
-        imageView.clipsToBounds = true
-        return imageView
+    private lazy var progressView = {
+        let progressView = CircularProgressView()
+        progressView.delegate = self
+        progressView.size = 140
+        progressView.draw()
+        return progressView
     }()
 
-    private lazy var deleteButton: UIButton = {
+    private lazy var progressRateLabel = {
+        let progressRateLabel = UILabel()
+        progressRateLabel.text = "0%"
+        progressRateLabel.font = .systemFont(ofSize: 32, weight: .bold)
+        return progressRateLabel
+    }()
+
+    private lazy var deleteButton = {
         let button = UIButton(type: .system)
-        let trashImage = UIImage(systemName: "trash.circle") // 쓰레기통 아이콘
+        let trashImage = UIImage(systemName: "trash") // 쓰레기통 아이콘
         button.setImage(trashImage, for: .normal)
-        button.tintColor = .black
+        button.tintColor = .label
+        button.transform = .init(scaleX: 0.6, y: 0.6)
         button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
         return button
     }()
 
-    private lazy var titleLabel: UILabel = {
+    private lazy var titleLabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
 
     private lazy var createdLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = .systemGray
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
-        setupUI()
+
+        addSubview(progressView)
+        progressView.snp.makeConstraints { make in
+            make.width.equalTo(140)
+            make.height.equalTo(140)
+        }
+
+        addSubview(deleteButton)
+        deleteButton.snp.makeConstraints { make in
+            make.centerX.equalTo(progressView)
+            make.centerY.equalTo(progressView).offset(40)
+        }
+
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(progressView.snp.bottom).offset(14)
+            make.centerX.equalToSuperview()
+        }
+
+        addSubview(createdLabel)
+        createdLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.centerX.equalToSuperview()
+        }
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func setupUI() {
-        addSubview(circleImageView)
-        addSubview(deleteButton)
-        addSubview(titleLabel)
-        addSubview(createdLabel)
-
-        circleImageView.frame = CGRect(x: 0, y: 0, width: 140, height: 140)
-        deleteButton.frame = CGRect(x: 110, y: -10, width: 50, height: 50)
-        titleLabel.frame = CGRect(x: 0, y: 160, width: bounds.width, height: 20)
-        createdLabel.frame = CGRect(x: 0, y: frame.size.height - 30, width: frame.size.width, height: 20) // 높이는 원하는 값으로 조정
-
-        bringSubviewToFront(circleImageView)
-        bringSubviewToFront(deleteButton)
-    }
-
-    @objc private func handleDelete() {
-        delegate?.didTapDeleteButton(in: self)
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        progressView.progress(0, animated: false)
     }
 
     func configure(with deck: Deck) {
+        let rate = deck.rate
         titleLabel.text = deck.title
         createdLabel.text = deck.createdDate.format()
+        progressRateLabel.text = "\(Int(rate * 100))%"
+        progressView.progress(.init(rate), animated: false)
     }
 
-    private func setupCell() {
-        backgroundColor = .clear
+    @objc private func handleDelete() {
+        deleteButtonTapped?(self)
+    }
+}
+
+extension CircleCell: CircularProgressViewDelegate {
+    func innerView(_ view: UIView) {
+        view.addSubview(progressRateLabel)
+        progressRateLabel.snp.makeConstraints { make in
+            make.center.equalTo(view)
+        }
     }
 }

@@ -63,7 +63,7 @@ final class DeckView: UIView, RootView {
         startButton.isUserInteractionEnabled = !deck.isEmpty
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.progressView.progress = .init(rate)
+            self?.progressView.progress(.init(rate), animated: true)
         }
     }
 

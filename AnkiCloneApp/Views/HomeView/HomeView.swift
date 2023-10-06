@@ -2,8 +2,17 @@ import EventBus
 import SnapKit
 import UIKit
 
-final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionViewDataSource, CircleCellDelegate {
-    var decks: [Deck] = []
+final class HomeView: UIView, RootView {
+    var decks: [Deck] = [] {
+        didSet { homeCollectionView.reloadData() }
+    }
+
+    private lazy var titleLabel = {
+       let titleLabel = UILabel()
+        titleLabel.text = "덱 모음집"
+        titleLabel.font = .systemFont(ofSize: 35, weight: .black)
+        return titleLabel
+    }()
 
     private lazy var settingButton: UIButton = {
         let button = UIButton(type: .system)
@@ -86,34 +95,39 @@ final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionVi
     }
 
     private func setUI() {
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.height.equalTo(35)
+            make.left.equalToSuperview().offset(30)
+            make.top.equalTo(safeAreaLayoutGuide)
+        }
+        
         addSubview(settingButton)
-        addSubview(floatingButton)
-        addSubview(writeButton)
-        addSubview(homeCollectionView)
-
         settingButton.snp.makeConstraints { make in
-            make.width.equalTo(37)
-            make.height.equalTo(37)
-            make.left.equalToSuperview().offset(330)
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(0)
+            make.width.equalTo(35)
+            make.height.equalTo(35)
+            make.right.equalToSuperview().offset(-30)
+            make.top.equalTo(safeAreaLayoutGuide)
         }
 
+        addSubview(floatingButton)
         floatingButton.snp.makeConstraints { make in
             make.width.height.equalTo(60)
             make.bottomMargin.equalToSuperview().offset(-40)
             make.rightMargin.equalToSuperview().offset(-20)
         }
 
+        addSubview(writeButton)
         writeButton.snp.makeConstraints { make in
             make.width.height.equalTo(60)
             make.bottom.equalTo(floatingButton.snp.top).offset(-15)
             make.rightMargin.equalToSuperview().offset(-20)
         }
 
+        addSubview(homeCollectionView)
         homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(settingButton.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(35)
-            make.right.equalToSuperview().offset(-35)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.horizontalEdges.equalToSuperview().inset(30)
             make.bottom.equalToSuperview()
         }
     }
@@ -165,28 +179,32 @@ final class HomeView: UIView, RootView, UICollectionViewDelegate, UICollectionVi
         animation.isRemovedOnCompletion = false
         floatingButton.layer.add(animation, forKey: nil)
     }
+}
 
+extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decks.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "circleCell", for: indexPath) as! CircleCell
-        cell.delegate = self
         cell.configure(with: decks[indexPath.row])
+        cell.deleteButtonTapped = deleteButtonTapped
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        EventBus.shared.emit(PushToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
-    }
-
-    func didTapDeleteButton(in cell: CircleCell) {
+    private func deleteButtonTapped(_ cell: CircleCell) {
         guard let indexPath = homeCollectionView.indexPath(for: cell) else { return }
         EventBus.shared.emit(ShowDeleteDeckAlertEvent(payload: .init(deck: decks[indexPath.item]) { [weak self] in
             guard let self, let indexPath = self.homeCollectionView.indexPath(for: cell) else { return }
             decks.remove(at: indexPath.row)
             homeCollectionView.deleteItems(at: [indexPath])
         }))
+    }
+}
+
+extension HomeView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        EventBus.shared.emit(PushToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
     }
 }

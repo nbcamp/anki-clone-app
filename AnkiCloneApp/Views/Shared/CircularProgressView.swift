@@ -12,14 +12,20 @@ final class CircularProgressView: UIView {
     var color: UIColor = .black
     var lineWidth: CGFloat = 0.15
 
-    var progress: CGFloat = .zero {
-        didSet { progressLayer.strokeEnd = progress }
-    }
+    private(set) var progress: CGFloat = .zero
 
     weak var delegate: CircularProgressViewDelegate?
 
     private let circularLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
+    
+    func progress(_ progress: CGFloat, animated: Bool = false) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(!animated)
+        self.progress = progress
+        progressLayer.strokeEnd = progress
+        CATransaction.commit()
+    }
 
     func draw() {
         let radius = size / 2

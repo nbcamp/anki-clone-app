@@ -4,14 +4,25 @@ import UIKit
 
 final class StudyView: UIView, RootView {
     weak var deck: Deck? {
-        didSet { currentIndex = 0 }
+        didSet {
+            studies = deck?.studies ?? []
+        }
+    }
+
+    private var totalCount: Int = 0
+    private var studies: [FlashCard] = [] {
+        didSet {
+            totalCount = studies.count
+            statLabel.text = "\(currentIndex + 1) / \(totalCount)"
+            currentIndex = totalCount > 0 ? 0 : -1
+        }
     }
 
     private var currentIndex: Int = -1 {
         didSet {
-            guard let deck, !deck.studies.isEmpty else { return }
-            currentFlashCard = deck.studies[currentIndex]
-            statLabel.text = "\(currentIndex + 1) / \(deck.studies.count)"
+            guard !studies.isEmpty else { return }
+            currentFlashCard = studies[currentIndex]
+            statLabel.text = "\(currentIndex + 1) / \(totalCount)"
         }
     }
 
@@ -74,13 +85,13 @@ final class StudyView: UIView, RootView {
             guard let self else { return }
             guard let flashCard = self.currentFlashCard else { return }
             EventBus.shared.emit(RemindFlashCardEvent(payload: .init(flashCard: flashCard, after: type.rawValue) {
-                if self.currentIndex + 1 >= (self.deck?.studies.count ?? 0) {
+                if self.currentIndex + 1 < self.totalCount {
+                    self.currentIndex += 1
+                    self.isFlipped = false
+                } else {
                     remindButtonsView.isHidden = true
                     self.flipCardButton.isHidden = true
                     self.endStudyButton.isHidden = false
-                } else {
-                    self.currentIndex += 1
-                    self.isFlipped = false
                 }
 
             }))
@@ -149,7 +160,7 @@ final class StudyView: UIView, RootView {
     @objc func flipCardButtonTapped() {
         isFlipped = true
     }
-    
+
     @objc func endStudyButtonTapped() {
         guard let viewController else { return }
         EventBus.shared.emit(PopViewControllerEvent(payload: .init(viewController: viewController)))

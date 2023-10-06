@@ -59,6 +59,11 @@ final class HomeViewController: RootViewController<HomeView> {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.decks = DeckService.shared.decks
+    }
+
     private func showCreateCellAlert(completion: @escaping (String) -> Void) {
         let alertController = UIAlertController(title: "단어장 추가하기", message: "단어장 이름을 작성해주세요.", preferredStyle: .alert)
 
