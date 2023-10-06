@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		039ED20B2ACC41F700138684 /* EditFlashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039ED20A2ACC41F700138684 /* EditFlashViewController.swift */; };
+		039ED20B2ACC41F700138684 /* EditFlashCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039ED20A2ACC41F700138684 /* EditFlashCardViewController.swift */; };
 		039ED20E2ACC43B600138684 /* EditFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039ED20D2ACC43B600138684 /* EditFlashCardView.swift */; };
 		331A57462AC2844A0044A94C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 331A57452AC2844A0044A94C /* SnapKit */; };
 		331A574B2AC284940044A94C /* Publishable in Frameworks */ = {isa = PBXBuildFile; productRef = 331A574A2AC284940044A94C /* Publishable */; };
@@ -52,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		039ED20A2ACC41F700138684 /* EditFlashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlashViewController.swift; sourceTree = "<group>"; };
+		039ED20A2ACC41F700138684 /* EditFlashCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlashCardViewController.swift; sourceTree = "<group>"; };
 		039ED20D2ACC43B600138684 /* EditFlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlashCardView.swift; sourceTree = "<group>"; };
 		331A57502AC2857B0044A94C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		331A57532AC285AF0044A94C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				331A575E2AC28CA60044A94C /* SettingViewController.swift */,
 				33EE74212ACEC400004E1BB6 /* DeckViewController.swift */,
 				331A57602AC291270044A94C /* StudyViewController.swift */,
-				039ED20A2ACC41F700138684 /* EditFlashViewController.swift */,
+				039ED20A2ACC41F700138684 /* EditFlashCardViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -400,7 +400,7 @@
 				33EE74252ACEC42B004E1BB6 /* DeckView.swift in Sources */,
 				331A57542AC285AF0044A94C /* RootView.swift in Sources */,
 				331A577F2AC299120044A94C /* DeckService.swift in Sources */,
-				039ED20B2ACC41F700138684 /* EditFlashViewController.swift in Sources */,
+				039ED20B2ACC41F700138684 /* EditFlashCardViewController.swift in Sources */,
 				331A57762AC2975A0044A94C /* UIResponder+Ext.swift in Sources */,
 				333551292AC282130025C29E /* AppDelegate.swift in Sources */,
 				331A57892AC2CF0D0044A94C /* Date+Ext.swift in Sources */,

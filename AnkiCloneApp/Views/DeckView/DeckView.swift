@@ -4,7 +4,7 @@ import UIKit
 
 final class DeckView: UIView, RootView {
     private(set) weak var deck: Deck?
-    
+
     private lazy var progressView = {
         let progressView = CircularProgressView()
         progressView.delegate = self
@@ -59,8 +59,10 @@ final class DeckView: UIView, RootView {
         else if deck.isCompleted { "모든 학습(\(deck.flashCards.count)개)을 완료했습니다!" }
         else { "\(deck.flashCards.count)개의 카드 중 \(deck.studies.count)개의 학습이 필요합니다." }
 
-        startButton.layer.opacity = deck.isEmpty ? 0.2 : 1.0
-        startButton.isUserInteractionEnabled = !deck.isEmpty
+        startButton.layer.opacity = if deck.isCompleted { 0 }
+        else if deck.isEmpty { 0.2 }
+        else { 1.0 }
+        startButton.isUserInteractionEnabled = !deck.isEmpty || !deck.isCompleted
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             self?.progressView.progress(.init(rate), animated: true)
@@ -99,12 +101,12 @@ final class DeckView: UIView, RootView {
     }
 
     @objc private func addFlashCardButtonTapped() {
-        EventBus.shared.emit(PresentEditFlashCardScreenEvent())
+        EventBus.shared.emit(MoveToEditFlashCardScreenEvent())
     }
 
     @objc private func startStudyButtonTapped() {
         guard let deck else { return }
-        EventBus.shared.emit(PushToStudyScreenEvent(payload: .init(deck: deck)))
+        EventBus.shared.emit(MoveToStudyScreenEvent(payload: .init(deck: deck)))
     }
 }
 

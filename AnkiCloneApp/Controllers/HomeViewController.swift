@@ -1,7 +1,7 @@
 import EventBus
 import UIKit
 
-struct PushToSettingScreenEvent: EventProtocol {
+struct MoveToSettingScreenEvent: EventProtocol {
     let payload: Void = ()
 }
 
@@ -9,7 +9,7 @@ struct ShowCreateNewDeckAlertEvent: EventProtocol {
     let payload: (String) -> Void
 }
 
-struct PushToDeckScreenEvent: EventProtocol {
+struct MoveToDeckScreenEvent: EventProtocol {
     struct Payload {
         let deck: Deck
     }
@@ -32,7 +32,7 @@ final class HomeViewController: RootViewController<HomeView> {
         rootView.configure(with: DeckService.shared.decks)
         SettingService.shared.requestNotificationAuthorization() // 푸시알림 권한요청
 
-        EventBus.shared.on(PushToSettingScreenEvent.self, by: self) { listener, _ in
+        EventBus.shared.on(MoveToSettingScreenEvent.self, by: self) { listener, _ in
             listener.navigationController?.pushViewController(SettingViewController(), animated: true)
         }
 
@@ -40,7 +40,7 @@ final class HomeViewController: RootViewController<HomeView> {
             listener.showCreateCellAlert(completion: payload)
         }
 
-        EventBus.shared.on(PushToDeckScreenEvent.self, by: self) { listener, payload in
+        EventBus.shared.on(MoveToDeckScreenEvent.self, by: self) { listener, payload in
             let deckVC = DeckViewController()
             deckVC.deck = payload.deck
             listener.navigationController?.pushViewController(deckVC, animated: true)

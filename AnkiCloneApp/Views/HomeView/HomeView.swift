@@ -129,14 +129,14 @@ final class HomeView: UIView, RootView {
 
         addSubview(homeCollectionView)
         homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(40)
             make.horizontalEdges.equalToSuperview().inset(30)
             make.bottom.equalToSuperview()
         }
     }
 
     @objc private func didTapSettingButton() {
-        EventBus.shared.emit(PushToSettingScreenEvent())
+        EventBus.shared.emit(MoveToSettingScreenEvent())
     }
 
     @objc private func didTapFloatingButton() {
@@ -208,6 +208,6 @@ extension HomeView: UICollectionViewDataSource {
 
 extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        EventBus.shared.emit(PushToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
+        EventBus.shared.emit(MoveToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
     }
 }

@@ -1,10 +1,10 @@
 import EventBus
 
-struct PresentEditFlashCardScreenEvent: EventProtocol {
+struct MoveToEditFlashCardScreenEvent: EventProtocol {
     let payload: Void = ()
 }
 
-struct PushToStudyScreenEvent: EventProtocol {
+struct MoveToStudyScreenEvent: EventProtocol {
     struct Payload {
         let deck: Deck
     }
@@ -21,15 +21,13 @@ final class DeckViewController: RootViewController<DeckView> {
         super.viewDidLoad()
         title = deck?.title
 
-        EventBus.shared.on(PresentEditFlashCardScreenEvent.self, by: self) { subscriber, _ in
-            // TODO: 아래 코드로 대체 필요
-//            subscriber.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: true)
-            guard let deck = subscriber.deck else { return }
-            DeckService.shared.create(card: .init(front: "Front", back: "Back", of: deck))
-            subscriber.rootView.configure(with: deck)
+        EventBus.shared.on(MoveToEditFlashCardScreenEvent.self, by: self) { subscriber, _ in
+            let flashCardVC = EditFlashCardViewController()
+            flashCardVC.deck = subscriber.deck
+            subscriber.navigationController?.pushViewController(flashCardVC, animated: true)
         }
 
-        EventBus.shared.on(PushToStudyScreenEvent.self, by: self) { subscriber, payload in
+        EventBus.shared.on(MoveToStudyScreenEvent.self, by: self) { subscriber, payload in
             let studyVC = StudyViewController()
             studyVC.deck = payload.deck
             subscriber.navigationController?.pushViewController(studyVC, animated: true)
