@@ -3,9 +3,7 @@ import SnapKit
 import UIKit
 
 final class HomeView: UIView, RootView {
-    var decks: [Deck] = [] {
-        didSet { homeCollectionView.reloadData() }
-    }
+    private(set) var decks: [Deck] = []
 
     private lazy var titleLabel = {
        let titleLabel = UILabel()
@@ -80,6 +78,11 @@ final class HomeView: UIView, RootView {
     }
 
     private var animation: UIViewPropertyAnimator?
+    
+    func configure(with decks: [Deck]) {
+        self.decks = decks
+        homeCollectionView.reloadData()
+    }
 
     func initializeUI() {
         backgroundColor = .systemBackground
