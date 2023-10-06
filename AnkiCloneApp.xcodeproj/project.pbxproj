@@ -44,6 +44,7 @@
 		33EE74222ACEC400004E1BB6 /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74212ACEC400004E1BB6 /* DeckViewController.swift */; };
 		33EE74252ACEC42B004E1BB6 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74242ACEC42B004E1BB6 /* DeckView.swift */; };
 		33EE74272ACED557004E1BB6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74262ACED557004E1BB6 /* CircularProgressView.swift */; };
+		33EE74292ACFAF39004E1BB6 /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE74282ACFAF39004E1BB6 /* HomeCollectionHeaderView.swift */; };
 		3B86E8132ACD112D00B45AD0 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B86E8122ACD112D00B45AD0 /* CircleCell.swift */; };
 		C39346102AC9CE06005DF1D3 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393460F2AC9CE06005DF1D3 /* FlashCardView.swift */; };
 		C39346122AC9CFDD005DF1D3 /* FlashCardFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39346112AC9CFDD005DF1D3 /* FlashCardFullView.swift */; };
@@ -88,6 +89,7 @@
 		33EE74212ACEC400004E1BB6 /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		33EE74242ACEC42B004E1BB6 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		33EE74262ACED557004E1BB6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		33EE74282ACFAF39004E1BB6 /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		3B86E8122ACD112D00B45AD0 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		C393460F2AC9CE06005DF1D3 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		C39346112AC9CFDD005DF1D3 /* FlashCardFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardFullView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				331A57552AC28B3D0044A94C /* HomeView.swift */,
 				3B86E8122ACD112D00B45AD0 /* CircleCell.swift */,
+				33EE74282ACFAF39004E1BB6 /* HomeCollectionHeaderView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				331A57702AC296FD0044A94C /* Storage.swift in Sources */,
 				331A57812AC2991A0044A94C /* SettingService.swift in Sources */,
 				331A57782AC297720044A94C /* KeyboardHandler.swift in Sources */,
+				33EE74292ACFAF39004E1BB6 /* HomeCollectionHeaderView.swift in Sources */,
 				331A57742AC297350044A94C /* UIView+Ext.swift in Sources */,
 				DE7438262ACD12310066AC2A /* SettingViewModel.swift in Sources */,
 				331A57722AC297160044A94C /* UserDefaultsStorage.swift in Sources */,

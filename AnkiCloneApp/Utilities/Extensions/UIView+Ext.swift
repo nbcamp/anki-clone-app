@@ -2,7 +2,8 @@ import UIKit
 import EventBus
 
 extension UIView {
-    var name: String { String(describing: self) }
+    var name: String { Self.name }
+    static var name: String { String(describing: self) }
 }
 
 extension Int {

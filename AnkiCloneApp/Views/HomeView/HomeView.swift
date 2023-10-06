@@ -5,23 +5,6 @@ import UIKit
 final class HomeView: UIView, RootView {
     private(set) var decks: [Deck] = []
 
-    private lazy var titleLabel = {
-       let titleLabel = UILabel()
-        titleLabel.text = "덱 모음집"
-        titleLabel.font = .systemFont(ofSize: 35, weight: .black)
-        return titleLabel
-    }()
-
-    private lazy var settingButton: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(systemName: "gearshape")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
-        button.setImage(image, for: .normal)
-        button.tintColor = .black
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
-        return button
-    }()
-
     private lazy var floatingButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
@@ -34,7 +17,6 @@ final class HomeView: UIView, RootView {
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowColor = UIColor.black.cgColor
-
         button.addTarget(self, action: #selector(didTapFloatingButton), for: .touchUpInside)
         return button
     }()
@@ -53,14 +35,13 @@ final class HomeView: UIView, RootView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.alpha = 0
         button.addTarget(self, action: #selector(didTapWriteButton), for: .touchUpInside)
-
         return button
     }()
 
     private lazy var homeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 30
+        layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
         layout.itemSize = CGSize(width: 150, height: 210)
 
@@ -68,6 +49,12 @@ final class HomeView: UIView, RootView {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(CircleCell.self, forCellWithReuseIdentifier: "circleCell")
+        collectionView.register(
+            HomeCollectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: HomeCollectionHeaderView.name
+        )
+
         return collectionView
     }()
 
@@ -78,7 +65,7 @@ final class HomeView: UIView, RootView {
     }
 
     private var animation: UIViewPropertyAnimator?
-    
+
     func configure(with decks: [Deck]) {
         self.decks = decks
         homeCollectionView.reloadData()
@@ -98,19 +85,10 @@ final class HomeView: UIView, RootView {
     }
 
     private func setUI() {
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.height.equalTo(35)
-            make.left.equalToSuperview().offset(30)
-            make.top.equalTo(safeAreaLayoutGuide)
-        }
-        
-        addSubview(settingButton)
-        settingButton.snp.makeConstraints { make in
-            make.width.equalTo(35)
-            make.height.equalTo(35)
-            make.right.equalToSuperview().offset(-30)
-            make.top.equalTo(safeAreaLayoutGuide)
+        addSubview(homeCollectionView)
+        homeCollectionView.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview().inset(30)
         }
 
         addSubview(floatingButton)
@@ -126,17 +104,6 @@ final class HomeView: UIView, RootView {
             make.bottom.equalTo(floatingButton.snp.top).offset(-15)
             make.rightMargin.equalToSuperview().offset(-20)
         }
-
-        addSubview(homeCollectionView)
-        homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
-            make.horizontalEdges.equalToSuperview().inset(30)
-            make.bottom.equalToSuperview()
-        }
-    }
-
-    @objc private func didTapSettingButton() {
-        EventBus.shared.emit(MoveToSettingScreenEvent())
     }
 
     @objc private func didTapFloatingButton() {
@@ -189,6 +156,18 @@ extension HomeView: UICollectionViewDataSource {
         return decks.count
     }
 
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeCollectionHeaderView.name, for: indexPath) as? HomeCollectionHeaderView {
+                header.settingButtonTapped = {
+                    EventBus.shared.emit(MoveToSettingScreenEvent())
+                }
+                return header
+            }
+        }
+        fatalError("Unknown supplementary element of kind")
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "circleCell", for: indexPath) as! CircleCell
         cell.configure(with: decks[indexPath.row])
@@ -209,5 +188,11 @@ extension HomeView: UICollectionViewDataSource {
 extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         EventBus.shared.emit(MoveToDeckScreenEvent(payload: .init(deck: decks[indexPath.item])))
+    }
+}
+
+extension HomeView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        .init(width: collectionView.bounds.width, height: 100)
     }
 }

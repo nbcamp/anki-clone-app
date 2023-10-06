@@ -53,7 +53,13 @@ final class HomeViewController: RootViewController<HomeView> {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         rootView.configure(with: DeckService.shared.decks)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
 
     private func showCreateCellAlert(completion: @escaping (String) -> Void) {
